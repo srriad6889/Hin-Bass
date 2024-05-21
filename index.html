@@ -1,32 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Editor App</title>
-  <style>
-    textarea {
-      width: 100%;
-      height: 90vh;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Editor App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        #editor {
+            width: 100%;
+            height: 80vh;
+            border: 1px solid #ccc;
+            padding: 10px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        #buttons {
+            margin-top: 10px;
+        }
+        button {
+            padding: 10px 15px;
+            margin-right: 10px;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
 </head>
 <body>
-  <textarea id="editor"></textarea>
-  <button id="saveButton">Save</button>
-  <button id="loadButton">Load</button>
-  <script>
-    const editor = document.getElementById('editor');
-    const saveButton = document.getElementById('saveButton');
-    const loadButton = document.getElementById('loadButton');
+    <h1>Simple Editor App</h1>
+    <textarea id="editor" placeholder="Write your code here..."></textarea>
+    <div id="buttons">
+        <button onclick="saveContent()">Save</button>
+        <button onclick="loadContent()">Load</button>
+    </div>
+    <script>
+        function saveContent() {
+            const content = document.getElementById('editor').value;
+            localStorage.setItem('editorContent', content);
+            alert('Content saved!');
+        }
 
-    saveButton.addEventListener('click', () => {
-      localStorage.setItem('text', editor.value);
-    });
-
-    loadButton.addEventListener('click', () => {
-      editor.value = localStorage.getItem('text') || '';
-    });
-  </script>
+        function loadContent() {
+            const content = localStorage.getItem('editorContent');
+            if (content) {
+                document.getElementById('editor').value = content;
+                alert('Content loaded!');
+            } else {
+                alert('No content found!');
+            }
+        }
+    </script>
 </body>
-</html> 
+</html>
