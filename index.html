@@ -49,6 +49,7 @@
     <div id="buttons">
         <button onclick="saveContent()">Save</button>
         <button onclick="loadContent()">Load</button>
+        <button onclick="clearContent()">Clear</button>
         <button onclick="displayLocalStorage()">Display Local Storage</button>
     </div>
     <div id="localStorageContent"></div>
@@ -81,6 +82,13 @@
             } else {
                 console.log('No content found!');
             }
+        }
+
+        // Function to clear content from editor and localStorage
+        function clearContent() {
+            editor.setValue('');
+            localStorage.removeItem('editorContent');
+            console.log('Content cleared!');
         }
 
         // Function to display localStorage content
