@@ -67,7 +67,7 @@
         function saveContent() {
             const content = editor.getValue();
             localStorage.setItem('editorContent', content);
-            alert('Content saved!');
+            console.log('Content saved!');
         }
 
         // Function to load content from localStorage
@@ -77,9 +77,9 @@
                 editor.setValue(content);
                 // Force CodeMirror to refresh after setting the value
                 editor.refresh();
-                alert('Content loaded!');
+                console.log('Content loaded!');
             } else {
-                alert('No content found!');
+                console.log('No content found!');
             }
         }
 
@@ -94,8 +94,11 @@
             }
         }
 
+        // Auto-save content every 10 seconds
+        setInterval(saveContent, 10000);
+
         // Optional: Load content automatically on page load
         window.onload = loadContent;
     </script>
 </body>
-</html> 
+</html>
