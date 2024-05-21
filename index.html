@@ -33,6 +33,13 @@
         button:hover {
             background-color: #0056b3;
         }
+        #localStorageContent {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
     </style>
 </head>
 <body>
@@ -42,7 +49,9 @@
     <div id="buttons">
         <button onclick="saveContent()">Save</button>
         <button onclick="loadContent()">Load</button>
+        <button onclick="displayLocalStorage()">Display Local Storage</button>
     </div>
+    <div id="localStorageContent"></div>
     <!-- Include CodeMirror JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/codemirror.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/mode/javascript/javascript.min.js"></script>
@@ -66,11 +75,27 @@
             const content = localStorage.getItem('editorContent');
             if (content) {
                 editor.setValue(content);
+                // Force CodeMirror to refresh after setting the value
+                editor.refresh();
                 alert('Content loaded!');
             } else {
                 alert('No content found!');
             }
         }
+
+        // Function to display localStorage content
+        function displayLocalStorage() {
+            const content = localStorage.getItem('editorContent');
+            const displayDiv = document.getElementById('localStorageContent');
+            if (content) {
+                displayDiv.textContent = `Stored content: ${content}`;
+            } else {
+                displayDiv.textContent = 'No content found in localStorage.';
+            }
+        }
+
+        // Optional: Load content automatically on page load
+        window.onload = loadContent;
     </script>
 </body>
-</html>
+</html> 
