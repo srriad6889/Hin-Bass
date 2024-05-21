@@ -6,6 +6,9 @@
     <title>Enhanced Editor App</title>
     <!-- Include CodeMirror CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/codemirror.min.css">
+    <!-- Include CodeMirror Themes -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/theme/dracula.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/theme/eclipse.min.css">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -51,11 +54,25 @@
         <button onclick="loadContent()">Load</button>
         <button onclick="clearContent()">Clear</button>
         <button onclick="displayLocalStorage()">Display Local Storage</button>
+        <select id="languageSelect" onchange="changeLanguage()">
+            <option value="javascript">JavaScript</option>
+            <option value="python">Python</option>
+            <option value="xml">HTML/XML</option>
+            <option value="css">CSS</option>
+        </select>
+        <select id="themeSelect" onchange="changeTheme()">
+            <option value="default">Default</option>
+            <option value="dracula">Dracula</option>
+            <option value="eclipse">Eclipse</option>
+        </select>
     </div>
     <div id="localStorageContent"></div>
     <!-- Include CodeMirror JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/codemirror.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/mode/javascript/javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/mode/python/python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/mode/xml/xml.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/mode/css/css.min.js"></script>
     <script>
         // Initialize CodeMirror on the div with id 'editor'
         const editor = CodeMirror(document.getElementById('editor'), {
@@ -100,6 +117,20 @@
             } else {
                 displayDiv.textContent = 'No content found in localStorage.';
             }
+        }
+
+        // Function to change the language mode
+        function changeLanguage() {
+            const language = document.getElementById('languageSelect').value;
+            editor.setOption('mode', language);
+            console.log(`Language changed to: ${language}`);
+        }
+
+        // Function to change the theme
+        function changeTheme() {
+            const theme = document.getElementById('themeSelect').value;
+            editor.setOption('theme', theme);
+            console.log(`Theme changed to: ${theme}`);
         }
 
         // Auto-save content every 10 seconds
